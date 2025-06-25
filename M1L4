@@ -1,0 +1,50 @@
+Network Traffic Analysis
+
+  Monitoring, baselining, triaging, and assessing network communications occurring on partner networks are critical tasks required for practical Network Traffic Analysis (NTA). 
+  NTA aims to identify baseline deviations, classify the anomaly source as operational or malicious, and further triage and investigate any hostile activity. 
+
+  Establishing a baseline of regular communications if one does not exist.
+  Comparing real-time traffic against an established baseline.
+  Capturing network traffic for offline analysis.
+  Identifying anomalies that can present themselves as an increase in chatter from a host, the use of uncommon ports, protocols or ciphers. 
+  Identifying the use of protocols with known vulnerabilities. 
+  Unauthorized communications, for example, an Industrial Control System (ICS) Programmable Logic Controller (PLC) opening a connection to the internet (this could be an operational requirement, but it is unlikely). 
+
+
+  Effective NTA can be a daunting task. Understanding how hosts process traffic on a network and their relation to the Open Systems Interconnection (OSI) model with their capabilities can expedite and facilitate meeting task objectives. 
+  When assessing a network for NTA, consider the following:
+
+    Network Assets: What are the asset capabilities to support NTA? Do the assets on the network have packet capture capabilities? Do the assets support flow data? 
+    Data Source: Use filters to capture relevant data and strategically identify where to collect the data, such as gateways or switches connecting critical assets or crown jewels. 
+    Collection Source: Not all assets can collect data compatible with the toolset being used for analysis. Ensure that compatibility exists with tools being used. 
+    Collection Time: Historical data is key to building baselines and analyzing past events, though some tools lack the compute resources to store large amounts of data. Real-time collection can be used to identify anomalies. It is more effective if a reliable baseline exists. 
+    Full Packet Captures: Full packet captures are resource intensive and demand ample storage space if a mission requires analysis for an extended period of time. Applying filters and prioritizing data sources are key to minimizing storage impact.
+
+
+Layer 4: Transport
+
+TCP Metadata
+
+  TCP sessions are established by using a three-way handshake: Synchronize (SYN), SYN-ACK, and Acknowledge (ACK). 
+  The client sends a SYN packet to the server, receives a SYN-ACK response, and then sends an ACK response back to the server. 
+  Once a session is established, the metadata available in a TCP payload can be used to track the session. 
+  Routers performing Network Address Translation (NAT) track open sessions to determine which IP address to forward traffic to. 
+
+  Source IP (from IP Header)
+  Destination IP (from IP Header)
+  Source Port
+  Destination Port
+  Sequence Number
+
+  URG: Urgent Pointer.
+  ACK: Acknowledgment.
+  PSH: This flag means Push function. Using this flag, TCP allows a sending application to specify that the data must be pushed immediately. When an application requests the TCP to push data, the TCP should send the data that has accumulated without waiting to fill the segment.
+  RST: Reset the connection. The RST bit is used to RESET the TCP connection due to unrecoverable errors. When an RST is received in a TCP segment, the receiver must respond by immediately terminating the connection. A RESET causes both sides immediately to release the connection and all its resources. As a result, transfer of data ceases in both directions, which can result in loss of data that is in transit. A TCP RST indicates a connection that was terminated for an unknown reason.
+  SYN: This flag means synchronize sequence numbers. The source is beginning a new counting sequence. In other words, the TCP segment contains the sequence number of the first sent byte (ISN).
+  FIN: This flag means no more data from the sender. Receiving a TCP segment with the FIN flag does not mean that transferring data in the opposite direction is not possible. Because TCP is a fully duplex connection, the FIN flag will cause the closing of connection only in one direction. To close a TCP connection gracefully, applications use the FIN flag.
+
+UDP Metadata
+
+  UDP, being stateless, does not have sessions implemented at the Transport Layer (although applications can, and often do, implement their own logic).
+  However, routers performing NAT can be configured to allow for return traffic whenever a device behind the NAT sends a packet for a specific amount of time.
+

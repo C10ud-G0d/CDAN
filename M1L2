@@ -1,0 +1,154 @@
+Common Enterprise Services
+
+  Enterprise-level networks are composed of a wide variety of users, computers, servers, assets, and tools, and no two networks look the same. 
+  With every network having its own unique configuration, conducting any DCO actions in an environment can be a huge challenge.
+
+  Even though every network looks different, the services and protocols in use and how they communicate are the same across all networks. 
+  Having a better understanding of how these common services work, interact, and communicate is incredibly important for being able to conduct DCO actions within an enterprise network. 
+
+HTTP Overview
+
+  HTTP is an application-layer protocol used for relaying Internet services, such as handling communications and requests with web servers and resources. In its most basic form, HTTP is viewed as a file-sharing protocol.
+
+Methods
+
+The form in which HTTP requests and responses are labeled is through their HTTP methods. Common HTTP methods and descriptions of their functions are as follows:
+
+  GET: HTTP request for a resource or copy of a resource, e.g., request index.html file for a specified webpage.
+  HEAD: HTTP request for only the header message, with no message body, e.g., request header information about a specified web resource to learn more details without loading the full page.
+  POST: HTTP method for submitting an item into a specified resource, e.g., create new user within the website.
+  PUT: HTTP method to replace all currently existing specified resources, e.g., update user information of an already created user on the website.
+
+General advice is to use POST when you need the server to be in control of URL generation of your resources.
+Preferred method is to use PUT over POST in most instances. PUT and POST differ in that PUT is idempotent, meaning no matter how many times you run the command, it always produces the same results. 
+
+POST would yield different results for each time you run the command.
+
+Securing HTTP
+
+  HTTP is powerful and provides many functions. However, HTTP data is transferred in the clear, making it susceptible to sniffing and Man-in-the-Middle (MitM) attacks. 
+  To combat such susceptibility to attacks, Hypertext Transfer Protocol Secure (HTTPS) was developed as an extension of the base protocol. 
+  HTTPS allows for secure encryption transmission using Transport Layer Security (TLS). Previous versions used Secure Sockets Layer (SSL), but documented vulnerabilities have forced the transition to TLS. 
+  The base protocol changes to TCP port 443 by default when HTTPS is used. 
+
+Enter this display filter to limit the packets to only HTTP packets containing methods:
+
+http.request.method
+
+DNS Overview 
+
+  The DNS protocol is responsible for the translation of IP addresses to human-readable Uniform Resource Locators (URL). 
+  DNS consists of three standard types: DNS queries on User Datagram Protocol (UDP) port 53, DNS responses on UDP port 53, and zone transfers on Transmission Control Protocol (TCP) port 53. 
+  Learning about the key portions of DNS queries and responses is critical to understanding DNS network communications.
+
+DNS Queries
+
+ DNS queries — also known as lookups — initiate DNS protocol. Reverse lookups provide an IP address to hostname translation, and forward lookups provide a hostname to IP address translation.
+
+  Recursive Query: The DNS client provides a hostname, and the DNS resolver must provide an answer; it responds with either a relevant resource record or, if such a record cannot be found, an error message. 
+  The resolver starts a recursive query process, starting from the DNS root server, until it finds the authoritative name server that holds the IP address and other information for the requested hostname.
+  
+  Iterative Query: The DNS client provides a hostname, and the DNS resolver returns the best answer it can. 
+  If the DNS resolver has the relevant DNS records in its cache, it returns them. If not, it refers the DNS client to the root server or another authoritative name server nearest the required DNS zone. 
+  The DNS client must then repeat the query directly against the DNS server to which it was referred.
+  
+  Non-Recursive Query: The DNS resolver already knows the answer and either immediately returns a DNS record because the resolver already stores it in a local cache or queries a DNS name server that is authoritative for the record. 
+  In either case, there is no need for additional rounds of queries (as in recursive or iterative queries). Rather, a response is immediately returned to the client.
+
+DNS Record Types
+
+A Record: Record holding the IP address of a specified host within a domain.
+AAAA Record: Record holding the IPv6 address for a specified host within a domain.
+CNAME Record: Forwarding one domain or subdomain to another domain (no IP provided).
+MX Record: Record that directs mail to an email server.
+TXT Record: Record for keeping administrative notes.
+NS Record: Record holding the name and IP address of the name servers for the requested domain.
+SOA Record: Record holding administrative information for a domain.
+SRV Record: Record showing ports for services.
+PTR Record: Record holding domain name in reverse lookups.
+
+SMB Overview
+
+  SMB is a staple protocol that allows interconnected and trusted devices to communicate and share resources with one another. 
+  SMB is the backbone of any Windows Active Directory (AD)–centered enterprise network; it is used when logging into a machine as well as when accessing a Network File Share. 
+  In addition to internal networks, SMB is sometimes used in larger websites, controlling what certain users can access and view based on settings. To summarize, SMB is a file- and resource-sharing protocol
+
+Common Internet File System: Provides shared access to such networked resources like files and printers. When using this dialect, an authenticated client can potentially have full access to the responding server. This is mainly found in older Windows networks.
+Samba: The open-source suite of programs that allow non-Windows devices to integrate with Windows Active Directory environments.
+SMBv2: The default lowest version standard in Windows networks, replacing SMBv1. Although SMBv2 offers no form of encryption, it is slightly more secure than SMBv1.
+SMBv3: The newest standard of SMB, shipped by default with Windows 10 and Windows Server 2016; offers default encryption in the form of Advanced Encryption Standard-Galois/Counter Mode (AES-GCM).
+
+Securing SMB
+
+As stated earlier, SMBv1, the original version of SMB, is considered a legacy protocol and is not found within modern OSs and software. 
+SMBv2 is the minimum accepted version of SMB to be used. However, even SMBv2 is not secure by today's standards, and, where possible, SMBv3 should be used throughout any Windows network environment.
+
+FTP Overview
+
+  File Transfer Protocol (FTP) is a simple yet powerful protocol for transferring files between hosts. 
+  FTP is used as an internal protocol for resource sharing inside an enterprise network as well as for publicly accessible resources. 
+  FTP allows the use of access controls and monitoring and can even support anonymous logins.
+
+FTP supports two ways of configuring the connection between client and server: 
+
+Active Mode: A connection is made both from the client to the server and from the server to the client. 
+First, the FTP client attempts to initiate the connection to the FTP server over port 21 while supplying the server with an ephemeral port (PORT command) to connect back to the client. 
+The server then sends a connection back to the client over the designed ephemeral port. To use this mode, the client needs to be able to accept inbound connections. 
+For obvious security reasons, this is not always possible, which is why Passive Mode exists.
+
+Passive Mode: Two outbound connections from the client to the server are made. First, the FTP client attempts to initiate the connection to the FTP server over port 21. 
+Instead of sending a PORT command, it sends a PASV command, which prompts the server to supply an ephemeral port, which the client then uses to connect back to the server to establish the data connection. 
+This is used when the FTP client is unable to accept inbound connections.
+
+Much like HTTP response codes, FTP uses its own set of response codes called return codes. Below is a list of some of the more commonly seen return codes:
+
+Return Code 200: The server accepted the command, and it ran successfully.
+Return Code 212: The message attached is referring to the status of the directory.
+Return Code 213: The message attached is referring to the status of the file.
+Return Code 214: This is a help message for the user interacting with the server.
+Return Code 221: This is sent when the server is closing the control connection.
+Return Code 226: This is sent when the server is closing the data connection.
+Return Code 331: This is sent when the server accepts the supplied user name from the FTP client
+
+Securing FTP
+
+FTP is susceptible to attacks in its standard form, as authentication and data are sent completely unencrypted. 
+This leaves all data vulnerable to theft or alteration during transmission. To secure this format, FTP makes use of the Secure Shell (SSH) protocol. 
+SSH allows for secure authentication and creates encryption over the FTP protocol, and it is therefore called SSH File Transfer Protocol (SFTP). 
+SFTP alters the standard port usage from 20/21 to 22 (SSH). However, an even more secure version, File Transfer Protocol Secure (FTPS), is used far more widely. 
+
+SMTP Overview
+
+  A user's message is sent from their email user agent directly to a Message Transfer Agent (MTA) server. 
+  Then SMTP is used between MTAs, starting by establishing a three-way handshake over TCP port 25. 
+  The MTAs transfer the message to ensure the email message flows to the proper mail transfer agent of the recipient. 
+  Often this must jump through far more than two servers, as Figure 1.2-42 suggests. After the message reaches the final MTA, the recipient can access the message through the use of an email user agent.
+
+  An additional device used in SMTP is called an edge transport server. Edge transport servers reside on the edge of a local network, often associated with an organization. 
+  These servers are responsible for coordinating any email that travels into or out of the local network. Edge servers provide a means of securing email traffic by providing layers of protection in filters and message flow. 
+  Edge servers are commonly responsible for filtering out spam or malicious email traffic. Another SMTP device is an SMTP Open Mail Relay. 
+  These devices are meant to work in forwarding traffic to proper MTAs, or basically routing the mail on to reach its proper destination. 
+  These devices used to be a common implementation of SMTP, but are no longer used regularly due to malicious activity like spam being easily sent through them or worms replicating through their services.
+
+  SMTP has become outdated in numerous ways and has been replaced by Extended SMTP (ESMTP). ESMTP provides numerous improvements by adding such features as audio, video, images, and multiple languages within the message formats.
+
+Securing SMTP
+
+Like many other older protocols, SMTP was not built with many inherent securities. 
+However, like many other protocols, the use of TLS can be used to add much-needed encryption to the communications of SMTP. 
+Unlike the other protocols, however, SMTP does not get a new protocol for this added security but simply works by ensuring TLS is enabled between all agents and servers using SMTP.
+
+OT Overview
+
+Operational Technology (OT) networks communicate over specialized and often proprietary protocols. 
+These networks, while operating by their own standards, are usually closed off and carefully monitored, with any changes in the environment carefully and precisely implemented. 
+This is due to the volatile nature of the interoperability between devices. Additionally, these networks typically house critical machinery and instruments, such as fuel pumps, valves, and other specialized tools in various environments.
+any OT protocols besides those in the table above exist, and proprietary protocols are still commonly used within OT networks. 
+Many of these protocols are unique to the device manufacturer and are created that way to keep the protocol unique, obscure, and capable of safely and securely transmitting data.
+Some standard IT network protocols, such as DNS, are now being used in OT networks. 
+Such IT protocols provide the same unique functions while used on these networks and provide key functions for OT network expansion. 
+However, these protocols are still altered in scope to not provide services outside of the OT network environment. 
+Due to the nature of these protocols being widely used and commonly the focus of cyber attacks, many OT implementations avoid them if possible. 
+Securing OT networks is a challenge, in that many of the systems are built without security in mind or have very outdated implementations. 
+This insecurity is combatted by ensuring most OT networks are completely closed or have strictly limited and controlled access to external networks or devices. 
+

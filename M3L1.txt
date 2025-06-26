@@ -1,0 +1,91 @@
+Cyberspace
+
+Referred to as Intelligence Preparation of the Operational Environment (IPOE), any military operation requires an analysis of the enemy's capabilities and possible courses of action, which, in turn, includes a detailed analysis of key terrain — physical locations that can be easily pointed to on a map that may provide an advantage to an adversary.
+Identifying key terrain provides valuable information on where to focus efforts to defend or attack a physical location. 
+
+Terrain, which covers all of cyberspace, includes the logical and physical components. When defining terrain, DCO team members should use KT-C, Mission Relevant Terrain in Cyberspace (MRT-C), Task Critical Asset (TCA), and Defense Critical Asset (DCA), as outlined in USCYBERCOM Operational Guidance, Identification of Mission Relevant Terrain in Cyberspace.  
+
+  KT-C is any locality or area — physical or logical — where seizure, retention, or other specified degree of control provides a marked advantage in cyberspace to any combatant.  
+  
+  MRT-C is described as (but is not limited to) all devices, internal/external links, OSs, services, applications, ports, protocols, hardware, and software on servers required to enable the function of a critical asset.  
+  
+  TCA is an asset that is of such extraordinary importance that its incapacitation or destruction would have a serious, debilitating effect on the ability of one or more Department of Defense (DoD) or Office of the Secretary of Defense (OSD) components to execute the capability or mission-essential task it supports. TCAs are used to identify DCAs.  
+  
+  DCA is an asset of such extraordinary importance to operations in peace, crisis, and war that its incapacitation or destruction would have a serious, debilitating effect on the ability of the DoD to fulfill its missions.  
+
+Identifying terrain has a direct impact on a CPT’s mission. Once the CPT has an assigned terrain in which to hunt and operate, the threat hunter can filter data based on the types of systems and datasets available. 
+Data requirements are driven by the analysis of potential threat actors that can target the mission partners' networks and the Tactics, Techniques, and Procedures (TTP) they employ. 
+Identifying terrain, in turn, reduces the number of analytics necessary for the team to execute the mission objectives. The threat hunter can also filter for data on the identified MRT-C and KT-C to prioritize the required data collection.
+
+Supervisory Plane
+  The Supervisory Plane consists of cyberspace elements that perform such supervisory functions as start, stop, modify, or redirect. This plane provides a channel for Command and Control (C2).
+  An example of the Supervisory Plane is a botnet C2 attack in which the botnet C2 servers act as key cyber terrain. 
+
+Cyber Persona Plane
+  The Cyber Persona Plane describes identities in the cyber domain. 
+  The Cyber Persona Plane consists of user accounts or credentials, whether associated with a human or with an automated process (e.g., service accounts), and their relationship to one another. 
+  Cyber personas may directly relate to an actual individual or entity, incorporating personal or organizational data (e.g., email and IP addresses, web pages, phone numbers, web forum logins, or financial account passwords). 
+  Permissions to access physical and logical aspects of the OE are also included. 
+  When analyzing the cyber persona layer, identify key characteristics by considering the following:
+
+    Data and information consumed in the terrain.
+    How local users interrelate with the physical network and logical network layers.
+    Usernames, permission levels, email addresses, chat names, etc.
+
+Logical Plane
+  The Logical Plane comprises a wide range of systems, services, and protocols that maintain the network's availability. 
+  The Logical Plane consists of all the data, whether resting, in transit, or being used in the physical network layer. 
+  The logical network layer is based on programming or software that derives network communications, interactions, and connectivity. 
+  A logical network map is used to close information gaps and enrich data from other cyberspace layers. 
+
+    Websites or web pages that influence or have a social impact on the network.
+    Mission partner logical network configurations and vulnerabilities.
+    Mission partner physical network configurations.
+    Software that handles and shares mission partner data.
+    Virtual Private Networks (VPN) or subnets that cross physical boundaries.
+
+Physical Plane
+  The Physical Plane within a cybersecurity context is often described as directly mapping to Layer 1 of the Open Systems Interconnection (OSI) model. 
+  However, the Physical Plane cannot be constrained within the OSI model layers. 
+  The Physical Plane consists of the tactile IT devices and infrastructure that provide storage, transport, and processing of information within cyberspace. 
+  Depicting the Physical Plane within the OE allows analysts to inspect the plane as it relates to friendly and threat operations. 
+  Analysts derive the Physical Plane depiction from products developed by the network owner and their network validation.
+
+    Threat C2 systems — physical devices adversaries use to leverage to execute their operations — that traverse the cyberspace domain.
+    Critical nodes that a threat actor can use as a jump point to gain additional access in the OE.
+    Physical network infrastructure in the terrain (additional examples are fiber optic cables, wireless access points, firewalls, and storage arrays).
+    Assets with the ability to access data and information residing on and moving through the network, such as packet capture devices.
+    Physical storage locations with the most critical information and accessibility to that information.
+    Implemented measures that prevent threat actors from accessing the networks.
+
+
+Geographic Plane
+  The Geographical Plane defines the physical location of infrastructure supporting cyber operations. Some examples of the Geographical Plane are:
+    Physical location of Virtual Private Network (VPN) capable devices connecting two secure facilities over the internet.
+    Power substation servicing power to a high value asset (military base, hospital, government building).
+    Forward operating base conducting intelligence collection. 
+
+Threat Hunting Methodologies
+  Cyberspace Threat Hunting (CTH) is the process of actively searching information systems to identify and stop malicious cyberspace activity. 
+  CTH can be carried out at all network tiers to meet DCO requirements. Three unique core CTH methodologies exist: driven by analytics, situational awareness, and intelligence.
+
+  Analytics-Driven CTH Methodology
+    Analytics-driven methodology leverages data and analytics. 
+    This methodology uses complex queries and algorithms to apply to data sets. 
+    Often the queries are applied using automation in software.
+    A key distinction with the analytics methodology is that no physical access to local machines, networks, or systems is required. Data artifacts consisting of sensor alerts, system logs, and network traffic are vital to the analytics-driven methodology. 
+    CTH analysts combine knowledge of data artifacts with knowledge of automated analysis capabilities to develop a picture of the network terrain.
+
+
+  Situational Awareness–Driven CTH Methodology
+    Situational awareness–driven methodology leverages an advanced understanding of a particular cyberspace terrain in order to detect anomalous activity. 
+    Much like analytics-driven CTH, situational awareness–driven methodology does not require physical access to local systems. 
+    Data artifacts pertaining to the Operating Environment (OE) are critical to this methodology. 
+    CTH analysts examine data artifacts over time in order to understand system normality and detect outliers in behavior, which often lead to discovering potentially Malicious Cyberspace Activity (MCA).
+
+
+  Intelligence-Driven CTH Methodology
+    The intelligence-driven methodology leverages timely, accurate, and mature Cyberspace Threat Intelligence (CTI) to detect advanced cyberspace threats. 
+    While employing the intelligence-driven method, cyber defense analysts utilize mission-strategic, actionable insights provided by CTI on adversaries and malicious activities, allowing CPT teams to make highly informed decisions when creating and executing developed hunt hypotheses.
+
+

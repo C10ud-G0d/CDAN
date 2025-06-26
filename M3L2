@@ -1,0 +1,74 @@
+Network Documentation Overview
+
+  Network documentation is a broad term used to describe the documents and other information that support an IT network. 
+  Whether in paper or electronic format, network documentation keeps and maintains records of the key aspects of the network for use by users and managers. 
+  Although each network has different documentation based on its relevant information, the following elements commonly appear.
+
+    Network topology map/diagram; specifically, an Open Systems Interconnection (OSI) Model Layer 1 and 2 diagram for physical systems and connections and a separate Layer 3 diagram that depicts Internet Protocol (IP) segments, such as subnets and Virtual Local Area Network (VLAN) numbers.
+    Documentation of the names, roles, IP addresses, and pertinent information for network and security equipment, servers, hosts, and other relevant IT assets. 
+    Circuit information, such as circuit type. ID, bandwidth, and carrier.
+    IP address allocation.
+    Network and general IT hardware (manufacturers, models, serial numbers, locations, components, configurations, firmware version, end-of-support, and end-of-life dates). 
+    Software installations (approved application list, versions, licensing, support, end-of-support, and end-of-life dates).
+    Vendors and service agreements.
+    Change logs.
+    Backup information and procedures. 
+    Disaster recovery procedures.  
+
+The benefits of proper network documentation to users and organizations are numerous and include the following:
+
+  Increased comprehension of network among users.
+  Preparation for future incidents.
+  Easier upgrade planning.
+  Simplified cost planning.
+  Effective and expeditious recovery in the event of a catastrophic system failure.  
+
+Enterprise Visibility Gaps
+  The modern IT organization faces a variety of challenges, especially in security. 
+  Traditional security measures address most internal vulnerabilities and threats, but areas may be overlooked. 
+  These fringe operational areas with their associated vulnerabilities are known as enterprise visibility gaps.
+
+    Supply chain attacks
+    Shadow IT
+    Mobile applications
+    Social engineering
+
+Supply Chain Attacks 
+  The vast majority of organizations use devices manufactured by other companies. For example, a technology company may use several different manufacturers for routers, switches, laptops, and servers. 
+  Despite thorough planning and execution of security measures to protect the network, the supply chain that produces the network devices may create a gap if not held to the same security standards as the network. 
+  This issue is especially challenging due to the reliance on the security practices of manufacturers, which is out of the control of end users. 
+
+Shadow IT
+  Shadow IT is the use of devices in an organization’s network without the knowledge or consent of the IT department. 
+  Examples include connection of a personal smartphone to a workplace network without permission or the installation and use of a software application not explicitly permitted by the IT department. 
+  The most common reason for employee use of shadow IT is convenience. By nature, most (but not all) security controls reduce the speed of tasks because they add more steps and increase the complexity of operations. 
+  However, such security controls have the benefit of protecting the organization from security incidents, which carry a substantially higher time and monetary burden. 
+
+Mobile Applications
+  Applications for mobile devices are another example of an enterprise visibility gap. 
+  Whereas desktop security is widely accepted and prolific, mobile security is generally less understood. 
+  App stores, such as Google Play, GetJar, and Aptoide, have millions of available applications. However, like desktop software, they may contain malicious code. 
+  By placing too much trust in the legitimacy of applications from app stores, users may inadvertently infect their device with malware. 
+
+Social Engineering 
+  Social engineering is a blanket term for the practice of manipulating people into performing unwanted actions. 
+  As security methods, technologies, and standards become stronger and more complex, the human component of security becomes a greater threat. 
+  For example, if a system uses an advanced antivirus, is up to date on patches, employs advanced encryption, and is hardened to security standards, an attacker may be thwarted from gaining access to the system. 
+  However, if the attacker can coax an employee to disclose credentials via a scam email, all these security measures may be bypassed.
+
+Network and Log Visibility Gaps
+  In addition to the enterprise visibility gaps mentioned, network visibility gaps may exist. 
+  Properly placed sensors in a network are critical to collecting logs and other information. 
+  For example, having a firewall without a sensor behind it may lead to incidents not being properly captured for analysis. 
+  To solve this, certain considerations are needed to strategically place network Test Access Points (TAP) or configure Switched Port Analyzers (SPAN, which is also known as port mirroring) to most effectively capture information. 
+
+  The intended purpose of a sensor determines where it will be placed. 
+  For example, if a sensor is needed to gather general traffic on the network, it will be placed at a major network intersection, such as a core router or switch. 
+  If an administrator wants to ensure that a firewall is functioning properly, a sensor may be placed before (facing external traffic) and after (facing the internal network) the firewall. 
+  Additionally, some networks may not allow placement of sensors in certain sections, such as Operational Environments (OE) of power plants or water treatment facilities. 
+  To provide visibility of traffic, sensors may be placed at the gateway of the network instead of inside it.  
+
+  Finally, log gaps are another type of enterprise visibility gap. 
+  Logs are critical in determining the past activity of a system. 
+  When (or after) an attack takes place, a threat actor may manipulate the system’s logs to cover their tracks.
+

@@ -1,0 +1,144 @@
+Security-Focused Configuration Management
+  The configuration of a system is a representation of a system’s components, how they are arranged, and how they are connected. 
+  Each component can affect the security posture of the system as a whole. 
+  Configuration management represents the process in which changes to the system, which will inevitably occur over time, are handled and processed. 
+  Organizations cannot control natural disasters like floods and earthquakes, hackers, and other threats. However, organizations can limit vulnerabilities and reduce threats via implementation of a robust security-focused configuration management process.
+
+Terminology
+  Configuration item: An identifiable component of a system (for example, hardware, software, firmware, documentation, or a combination thereof) that is a discrete element under change control.
+  Baseline configuration: An approved set of specifications for a configuration item at a given point in time. The baseline is used for future builds, releases, and/or changes to the item.
+  Configuration management plan (CM plan): A description of the roles, responsibilities, policies, and procedures for managing the configuration of the system or product.
+  Configuration Control Board (CCB): A group of qualified people responsible for controlling and approving changes throughout the lifecycle of a system or product; may also be referred to as a Change Control Board (CCB).
+  Configuration item identification: The methodology for selecting what items to place under configuration management and how to name them.
+  Configuration change control: The process for managing updates to a baseline configuration.
+  Configuration monitoring: The process for testing or assessing a configuration item against an established baseline and for reporting its compliance.
+
+Phases of SecCM
+
+  Planning
+      Planning for security early in an environment can have a great impact on the success of a project later on. 
+      The planning phase includes developing the foundation to build a security-focused CM program, including the creation of the policy and procedures for an organization to abide by and dissemination of that information throughout the organization. 
+      The policy addresses the implementation of SecCM plans, integration into existing security programs, frequency and personnel involved in CCBs, the tools and technology used in change control processes, the organization’s use of baseline configurations, and the methods for monitoring compliance to the CM plan.
+
+  Identifying and Implementing Configurations
+      The phase of identifying and implementing configurations takes the baseline configurations approved during the planning phase and starts their implementation throughout the organization. 
+      For a typical system, the baseline codifies the configuration item’s settings, software versions, physical or logical arrangement, and required security controls. 
+      Where possible, a baseline configuration is applied via automation to ensure uniformity.
+
+  Controlling Configuration Changes
+      Change is inevitable to an organization and its systems, which makes the phase of controlling configuration changes one of the most difficult to handle. 
+      This phase addresses how future changes to a baseline are managed while maintaining the security of the baseline. With SecCM, organizations ensure that changes are formally identified, proposed, reviewed, analyzed for security impact, tested, and approved prior to implementation. 
+      To maintain the secure integrity of a system, organizations typically enforce strict change time windows, employ access restrictions to who can implement a change, and maintain audit records to capture unauthorized and/or undocumented changes to a system.  
+
+  Monitoring
+      The monitoring phase is responsible for validating that a system is adhering to the prescribed organizational policies, procedures, and secure baselines. 
+      Monitoring helps to uncover new risks to an organization by identifying unauthorized or undocumented changes. 
+      SecCM monitoring is accomplished through assessment and reporting activities. 
+      Where possible, automation should be used to report and possibly correct on deviations from an established baseline.
+
+Types of Changes
+  While an organization audits its systems for changes during the monitoring phase, it will likely come across changes that are determined to be unauthorized. What is the difference between an authorized and an unauthorized change?
+
+﻿
+
+Authorized Changes
+﻿  Authorized changes refer to changes that have gone through the prescribed change control process and have been implemented or are pending implementation. 
+  Examples of a change that would undergo approval include installation of new Commercial Off-the-Shelf (COTS) software, a new networking device (for example, a router, switch, firewall, or VPN gateway), and an upgrade of an existing Database Management System (DBMS).
+  It is also important for an organization to designate in its CM plan any changes that do not require change control. 
+  These types of changes are deemed preapproved. Examples of preapproved changes vary from organization to organization but may include database content updates, removal of temporary files, and creation/deletion of new low-privileged users. 
+
+﻿
+
+Unscheduled or Unauthorized Changes
+﻿  Even organizations with robust and well-followed CM plans undoubtedly encounter changes not officially approved or controlled. 
+  Sometimes an activity, such as installing patches outside a configuration change control process, can have a significant impact on a system’s security posture. 
+  This may happen for various reasons, such as the change’s being conducted as a result of a critical vulnerability discovered on a system. 
+  This would be considered an unscheduled (or emergency) change. Whenever an unscheduled change occurs, it is incumbent on the system owners to document and review the change, even after the fact. 
+  Other times, a change activity may be deemed unauthorized. 
+  Unauthorized changes may occur when a system administrator makes a change but is unaware that the change requires a prescribed change control process. 
+  Unauthorized changes may also occur maliciously and may be an indicator of a compromise. Examples of a malicious change are an attacker’s enabling Remote Desktop Services (RDS), modifying a system’s password policy so that passwords never expire, and disabling the antivirus on a user’s workstation.
+  All authorized changes become a part of the system’s new baseline configuration, creating a “known-good” snapshot of the system, and marking a potential rollback, or restore point, for a system to return to if the need arises. 
+
+Security Impact Analysis﻿
+  According to NIST SP 800-128, security impact analysis is “the analysis conducted by qualified staff within an organization to determine the extent to which changes to the system affect the security posture of the system.” Within the CM plan, an organization should include the specific requirements that a change must be tested and scrutinized against in a security impact analysis.
+
+Conducting a Security Impact Analysis
+  Once a determination is made that a change request requires a security impact analysis, qualified staff in an organization follow the five steps listed below
+
+  1. Understand the change.
+  2. Identify vulnerabilities.
+  3. Assess risk.
+  4. Assess impact on existing security controls.
+  5. Plan safeguards and countermeasures.
+
+Understand the Change
+  The first step in analyzing a change is understanding it. This is accomplished best by developing a high-level overview of the change and highlighting how the change will modify the configuration item’s present state. 
+
+Identify Vulnerabilities
+  To the extent possible, a security impact analysis must identify and discover any vulnerabilities that the change may introduce into the changed component. 
+  This step takes varying forms, depending on the proposed change. 
+  For example, for a change involving the installation of a COTS hardware or software product, this step likely includes a search of the National Vulnerability Database (NVD) for any known vulnerabilities related to the product.
+
+Assess Risks
+  A change may introduce a new risk to the organization, but that does not necessarily mean that the change will be rejected. 
+  However, once a vulnerability is identified, a risk assessment of the vulnerability must be conducted. 
+  This risk assessment should capture the impact of the vulnerability, based on the likelihood of the threat occurring and the criticality of the system if exploited.
+
+Assess Impact on Existing Security Controls
+ An assessor must analyze, in particular, the impact that a change may have on existing security controls, either temporarily or permanently. 
+ For example, if a Web Application Firewall (WAF) that is responsible for filtering malicious Hypertext Transfer Protocol (HTTP) requests to a critical web server requires updating, a period may exist when the firewall cannot provide protection during the upgrade.
+
+Plan Safeguards and Countermeasures
+  Once an assessor has fully documented the risks for the change, it is up to the organization to determine the level of risk it is willing to accept or avoid. 
+  A change that has sufficient risk and cannot be altered or avoided undoubtedly requires development of mitigating controls, which are safeguards and countermeasures that reduce the risk to acceptable levels.
+
+
+Threat Hunting Refresher
+  During the introduction to threat hunting, the concept of the four-phase Threat Hunting Loop was also discussed. The Threat Hunting Loop phases, in order, are as follows:
+
+1. Creating a hypothesis.
+2. Investigating the idea.
+3. Uncovering new patterns and Tactics, Techniques, and Procedures (TTP).
+4. Informing and enriching analytics and detection capabilities.
+
+Targeting Strategy
+  Module 3 of the Cyber Defense Analyst – Network (CDA-N) course covered many of the fundamentals required for this lesson, such as network inventory, identifying Key Terrain in Cyberspace (KT-C), and conducting and understanding vulnerability scans. 
+  Additionally, the CDA-B course covered use of threat assessment to make informed decisions while planning. 
+  This section reviews these topics and discusses why they are relevant before pivoting into how they collectively factor into vulnerability-based hunting strategy.
+
+﻿
+
+Network Inventory
+  The act of taking network inventory is the process of accounting for all physical assets, network connections, and traffic within a mission partner’s ownership in order to gain situational awareness of the Operational Environment (OE). 
+  Having an accurate understanding of the mission partner’s network is critical in the success of any CPT mission. 
+  This is especially the case regarding vulnerability-based hunting, as any missing information causes gaps in situational awareness to accurately assess KT-C and conduct full-coverage vulnerability scanning.
+
+Identifying KT-C
+  Key terrain associated with cyberspace may be considered a physical node or data that is essential for mission accomplishment. 
+  Determining KT-C may be achieved by overlapping the mission partner’s critical assets, business functions, and key network infrastructure for both operational continuity and security.
+
+﻿
+
+Threat Assessment Reports
+  Detailed threat assessment reports are commonly used in CPT operations. Intelligence, operations, and mission partners provide detailed information that allows CPTs to be brought up to speed on a particular network, adversary, and terrain.  
+  A critical component of analyzing a detailed threat assessment report is identifying what information is useful for the mission and how that information is optimally applied. 
+  If possible, it is beneficial to gain historical information, as activity found may be attributed to past threats.
+
+﻿
+
+Vulnerability Scanning
+  Vulnerability scanning is the act of collecting system information and identifying whether that system is possibly susceptible to exploitation. 
+  The methods of identifying whether a system is potentially vulnerable ranges from simply identifying the version of a service to partially executing an exploit and identifying if the attempt was successful. 
+  The methods of scanning for vulnerabilities range from leveraging frameworks such as Nessus to more specialized tools such as Nikto or applying tools designed for a specific vulnerability. 
+  This lesson discusses the use of Nessus. However, it is beneficial to remember that more specialized vulnerability scanning tools exist.  
+  Accurate and full-coverage vulnerability scanning is dependent on an accurate network inventory. 
+  Whenever possible, review past vulnerability assessments and scans, as any threat activity observed may have leveraged a vulnerability that no longer exists due to the continuous changes of a live environment.
+
+The Big Picture
+  All the factors mentioned above should be considered when planning an approach for each vulnerability-based hunt. 
+  Complete network accountability is required to identify KT-C and gain an accurate assessment of which areas are vulnerable and which are more resilient within the mission partner’s network. 
+  Combining the information gathered with threat assessment reports helps in deciding how to prioritize the effort spent conducting analysis around vulnerable systems. 
+  Consider which threats are most likely and their TTPs, and then factor in how each threat’s TTPs match up with KT-C and which systems are vulnerable. 
+  Ultimately, no golden ratio of the factors mentioned exists, as one analyst may have a different opinion from another, so it is important to work with the team to develop a strategy.
+
+﻿

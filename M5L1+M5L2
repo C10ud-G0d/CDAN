@@ -1,0 +1,15 @@
+The Risk Equation
+  After determining impact and probability of the threats compiled in Phase 1 of the ACF, determining risk (or risk weight) is a simple equation, as follows:
+
+  Impact (I) × Probability (P) = Risk (R)
+
+  For example, if a threat has an impact rating of 4 and a probability rating of 3, the risk weight is 12 (4 × 3 = 12). A good rule of thumb for classifying threats is:
+  0 to 9: Low risk
+  10 to 16: Medium risk
+  17 to 25: High risk
+  Given the natural subjectivity of these numbers, it is important that all the initial figures are determined by the same person or committee for uniformity and consistency. 
+  One person might determine a risk weight of 20 when another might determine a risk weight of 10 for the same threat. Having added variance in subjective numbers is something to be avoided.
+
+  Module 3’s Key Terrain in Cyberspace (KT-C) lesson discussed tier levels for assets on a network, where Tier 1 is the most critical and Tier 3 is the least critical. 
+  Risk weight classification is a related concept, but instead of classifying terrain, it classifies actions against the terrain.
+

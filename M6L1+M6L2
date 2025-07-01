@@ -1,0 +1,88 @@
+Cyber Threat Intelligence Overview
+
+  At its heart, intelligence is the science and art of understanding the enemy. 
+  As a discipline, intelligence is as old as warfare itself. Commanders have striven to predict the actions of their adversary, whether on a kinetic battlefield or in a futuristic cyberwar. 
+  Understanding the enemy’s capability and intent is the only way to make informed decisions on one’s own tactics to employ in response.
+
+  Understanding the Operational Environment (OE) — the conditions, circumstances, and influences that affect the employment of capabilities — is paramount to making sound decisions in both offensive and defensive engagements. 
+  Traditionally in military intelligence, this refers to such things as the enemy’s firepower, aggressiveness, or infrastructure available to resupply their troops. 
+  In the cyber domain, direct correlations can be made to “traditional” intelligence. The product of these correlations forms CTI.
+
+
+Intelligence in the Cyber Domain
+  CTI is analyzed, actionable information, derived internally or externally, that aids an organization in identifying, assessing, monitoring, and responding to cyber threats. 
+  Because the cyber domain is now a major battlefield for crime, activism, and espionage, CTI has become increasingly essential to cyber defense. 
+  Relying on current and historical attack knowledge, an analyst can leverage CTI to prepare for future attacks on a defended terrain. 
+
+Data vs. Intelligence
+  In other words, analysis is what separates information from intelligence. 
+  For cyber defense, analysis is what makes data about threats in the cyber domain become CTI. 
+  For example, a Domain Name System (DNS) lookup for example[.]com is a piece of data. 
+  Further analysis may indicate that the domain is registered to Threat Actor, LLC, and can be tied to an ongoing espionage campaign. 
+  That extra analysis step is what makes data useful intelligence.
+
+The Intelligence Cycle
+  Direction
+    CTI analysis is always based on requirements. The first step of the Intelligence Cycle is to define a clear requirement or question for which intelligence should provide an answer. 
+    Often, for external intelligence, this requirement or question is submitted to an intelligence analyst in the form of a Request for Information (RFI). 
+    (The RFI process and format are covered later in this lesson.) Uses for intelligence are numerous, so RFIs may ask a wide variety of questions.
+
+Collection
+  The collection of cyber intelligence is typically the process of collecting data from networks useful in tracking a threat. 
+  However, it may come in other forms as well, such as reading a news article for political or economic information pertaining to a mission partner’s organization or viewing data from an open honeypot provided by researchers on the internet. 
+  At this point in the cycle, this is just data and not yet intelligence.
+
+Processing
+  An analyst should not overlook the importance of processing data to be usable. A CDA’s analysis platform should be flexible and configurable enough to view a multitude of different data types in a normalized way. 
+
+Analysis
+  CTI analysis is based on requirements. Without a requirement, the analysis has no question to answer. This is the step in which data becomes intelligence. 
+  Questions asked, or requirements presented, in the initial step of the cycle (Direction) are answered using analysis.
+
+Dissemination
+  Intelligence is a shared commodity. It should be shared with the entity that requested the information, and it is often shared with a larger community of intelligence analysts. 
+  CDAs should concern themselves with this step because the format and completeness of the collected data and analysis directly affect the value of the dissemination of intelligence.
+
+Feedback
+  The last step of the Intelligence Cycle is Feedback. Did the analysis properly answer the requirement? This is a question that CDAs should answer if requesting or analyzing intelligence. 
+  If the intelligence fails to meet the requirement, a new cycle is started in which the error is corrected or intelligence gaps are identified more fully.
+
+
+Levels of Intelligence
+  When dealing with consuming or collecting intelligence on a network, intelligence comes in different forms and at different levels, depending on requirements given to an analyst. Consider the following examples:
+
+  The political motivations of a threat group.
+  A list of APTs assessed to have the capability and intent to target a mission partner’s network. 
+  Domains tied to a specific APT for use in an Intrusion Detection System (IDS).
+
+  Each example represents a different level of intelligence that a CPT may request or be required to fill. 
+  The three levels, or taxonomic categories, of intelligence are strategic, operational, and tactical. The first example listed above represents strategic intelligence; the second, operational intelligence; and the third, tactical intelligence.
+
+Strategic Intelligence
+  Attacker motivations, politics, or trends that inform an organization’s policy decisions and planning represent the strategic level of intelligence. 
+  Often, strategic intelligence is the trigger for the start of an operation or a change to network architecture.
+
+Operational Intelligence
+  Attacker Tactics, Techniques, and Procedures (TTP) and capability are typically viewed as operational intelligence. 
+  This intelligence informs collection plans and mission-planning efforts prior to an incident response or hunt engagement.
+
+Tactical Intelligence
+  Immediately applicable intelligence, such as Indicators of Compromise (IOC), antivirus signatures, or IDS rules, fall into the tactical level of intelligence. 
+  This intelligence is most useful for CDAs on a mission during on-network engagements and retroactive investigations.
+
+Strategic intelligence reveals the motivations of an attacker. This informs such areas as collection plans and identification of threats to key terrain.
+Operational intelligence provides analysts with possible TTPs to hunt while on mission. This is essential to mission planning and when building detection capabilities for a certain threat group.
+Tactical intelligence gives analysts an opportunity to alert on specific, unique traits of an attacker. Although it is highly perishable, it can be extremely valuable and provides analysts real-time feedback.
+
+Diamond Model
+  A third CTI model is the Diamond Model of Intrusion Analysis, or, more simply, the Diamond Model. According to the Diamond Model, every cyber incident may be depicted as a diamond with four “points,” as illustrated in Figure 6.2-3 and described as follows:
+
+  Adversary: The threat actor responsible for the cyber attack or any other malicious activity. 
+  Capabilities: The TTPs associated with the adversary. 
+  Infrastructure: The adversary’s assets, both physical and logical, that are leveraged in their operations. 
+  Victim: The target of attacks, which may be organizations, individuals, or specific vulnerabilities.
+
+  Unlike the ATT&CK and Cyber Kill Chain models, the Diamond Model emphasizes the relationships of each component in the model. 
+  The relationships of the four points of the diamond may be analyzed, and greater insight into the threat actor may be gained. These points may be converged into a single phrase:
+
+

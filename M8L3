@@ -1,0 +1,65 @@
+Every rule begins with an action. The actions were described earlier in the lesson but are repeated here for clarity:
+
+  alert: Only logs an alert signifying that a rule was matched.
+  pass: Passes the traffic without further inspection.
+  drop: Drops the matching traffic and logs an alert.
+  reject: Drops the traffic and sends an unreachable error message to the sender.
+  rejectsrc, rejectdst, and rejectboth: Do the same as reject, but send the error message to the source, destination, or both.
+
+Header
+  The next section, header, defines protocol, source, destination, and direction of matching traffic. It must be written in a specific order, and, unlike the action section, the header has some specific syntax rules that must be followed.
+
+Protocol
+  The second word in every rule is always the protocol that it is written to match. It is a required item. Twenty-seven options exist in the current version of Suricata, and each protocol has its own corresponding options that come later in the rule. The most common protocols used are as follows:
+  
+  tcp (Transmission Control Protocol)
+  udp (User Datagram Protocol)
+  ip (Internet Protocol)
+  http (Hypertext Transfer Protocol)
+  dns (Domain Name System)
+  tls (Transport Layer Security)
+
+Source and Destination
+
+ Every rule requires a source and destination, even if the rule should alert on any traffic. Additionally, the source and destination both require an IP address (or addresses) and a port.
+
+Direction
+  The proper syntax for signifying left-to-right traffic flow is a hyphen followed by a greater-than symbol: ->. Using a less-than (<) symbol instead of a hyphen signifies bidirectional traffic flow: <>.
+
+Options
+  The Options section defines what Suricata looks for in the network traffic after the header matches its source and destination. Few required fields exist in the Options section, but a strict syntax must be followed when writing rule criteria. 
+  Some requirements when writing options are as follows:
+
+  The Options section must be surrounded by parentheses.
+  Each option (including the last option) must be trailed by a semicolon.
+  Every rule must have a Signature ID (sid) option. This is usually the last or second-to-last option defined by convention (not by rule).
+  Some options have settings that require a colon separating the option name and the settings it requires. The settings also must be wrapped in quotes if there are spaces in the text.
+
+msg (Message)
+  For all practical purposes, the msg field is the name of the rule. It should give some contextual information to alert the analyst as to which traffic was matched. 
+  This is a free-form option, but as the rules for options state, this requires a colon and the settings wrapped in quotes if there are spaces in the text.
+
+sid (Signature ID)
+  Every rule requires a sid. This is a locally significant, but arbitrary, number. The option requires a number to identify each rule (or signature) in order for Suricata to internally keep everything organized. 
+  If two rules have the same sid specified, Suricata does not process them and has unpredictable behavior throughout the entire ruleset. 
+
+Payload Keywords
+  content
+    The content keyword is the most common keyword outside the meta keywords described previously. 
+    This keyword defines the data that Suricata looks for in network traffic to match the rule. It is added to the rule in a similar fashion as the msg and sid keywords.
+
+  nocase
+    The option nocase is inserted after the content keyword to signify that Suricata should match on all cases of letters in the content. For example, nocase after content:cURL would match on curl, CURL, or cUrL (among other combinations).
+
+  startswith/endswith
+    Suricata gives the ability to search for content at the beginning or end of a piece of network traffic data. The startswith and endswith keywords do exactly that. 
+    For example, if an analyst were searching for a DNS request for the .biz top-level domain, using the endswith keyword would ensure that it matches only on that top-level domain and not another domain name with .biz in another portion of the domain.
+
+  Modifier Keywords
+    Each protocol has an abundance of its own keywords used to narrow what Suricata is looking for in the network traffic. For example, there are TLS keywords that tell Suricata to only look for a certain certificate or certificate serial number. 
+
+  Content Modifiers
+    Of the two types of modifiers, content modifiers are the older style. They look “backward” in the rule to create a match. An example of a content modifier is http_uri, which looks for the Universal Resource Identifier (URI) of an HTTP request
+
+  Sticky Buffer Modifiers
+    Contrary to how content modifiers look backward in the rule, sticky buffer modifiers go forward. For example, http_response_line is a sticky buffer keyword that looks for HTTP responses from the web server. 

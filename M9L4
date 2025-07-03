@@ -1,0 +1,53 @@
+PCAP Buffers Explained
+  Packet capture is an extremely powerful tool for Network Analysts. 
+  Full packet captures allow analysts to forensically investigate an entire stream of network traffic. 
+  Capturing the entire stream of network traffic collects not only the underlying data being transmitted but also all header information for the traffic, such as source, destination, and protocol type. 
+  Packet capture can be a powerful tool, but there are also numerous pitfalls to consider.
+
+  Performing packet capture is an extremely disk-intensive operation. 
+  The amount of disk space required for the storage of PCAPs is equal to the size of the traffic traversing the interface. 
+  On a busy link, this can consume disk space at a rapid rate. Additionally, as traffic continues to traverse the interface, PCAP files can become large. 
+  Large PCAP files can be difficult and inefficient to work with.
+
+  PCAP buffers can assist in alleviating the storage and efficiency burden of PCAP operations. 
+  Because there is a wide variety of PCAP tools that approach PCAP operations in different ways, the specific options pertaining to buffering may differ between these tools. 
+  Regardless, the intent and results are often the same.
+
+  Consider the following example of a PCAP implementation: An organization decides to implement packet capturing on a primary edge router. 
+  The organization has made the decision to capture all traffic that is traversing the edge of the network in either direction for forensic and analysis purposes. 
+  During the 8 peak hours of the day, the 100-megabit-per-second (Mbps) network link is 100% utilized.
+
+  In this example, a 100-Mbps link that experiences 100% utilization over 8 hours would result in a total data volume of 360 gigabytes (GB).
+  If the PCAP tool did not implement any kind of buffering, the result would be a single PCAP file that is 360 GB in size. 
+  A PCAP file of this size would be extremely difficult and inefficient to work with.
+
+  For this reason, PCAP tools offer varying capabilities to tune how PCAP files are written.  
+  Most tools allow PCAP files to be limited by size or time. Some tools also allow PCAP files to be rotated when disk space is full. 
+  Rotating files allows old PCAPs to be deleted as new ones are written to the disk.
+
+PCAP Buffers in Arkime
+  Arkime is a packet capture and searching tool. Arkime consists of a capture service and viewer service. 
+  The capture service listens on an interface and performs packet-capturing operations. The viewer service provides a web interface allowing an analyst to work with the captured PCAP data.
+
+  In addition to the Arkime capture and viewer services, Arkime relies on Elasticsearch. 
+  Arkime leverages Elasticsearch to index session-related information from PCAPs processed by Arkime. 
+  Actual PCAP files are written to the disk on the system running the Arkime capture service. 
+  Although understanding the minutiae of this configuration for the following lab is not necessary, it is important to understand that raw PCAPs are stored on the system running the Arkime capture service. 
+  Buffer settings explained in the lab impact how the capture service processes PCAPs on the capture system, not the data in Elasticsearch.
+
+PCAP Buffers in Stenographer
+  Stenographer is a lightweight PCAP utility designed to write packets to disk quickly, up to 10 gigabits per second (Gbps). 
+  Stenographer also manages disk usage and automatically rolls over the oldest packets when it runs out of storage. 
+  Because Stenographer was designed for speed, it lacks common PCAP functionality, such as a web interface, custom query language, and complex Transmission Control Protocol (TCP) stream reassembly. 
+  Stenographer indexes packets only up to the Transport layer of the Open Systems Interconnection (OSI) model, and queries are written in Berkeley Packet Filter (BPF) syntax. 
+
+  Unlike Arkime, Stenographer does not write data to disk in the standard PCAP format. 
+  Instead, Stenographer writes raw data to disk directly from the AF_PACKET buffer. This format consists of blocks of capture data that contain a small header followed by a linked list of packets. 
+  The result is that the stored capture files cannot be opened directly with traditional network analysis tools like Wireshark or Tcpdump. 
+  To retrieve packet data, analysts must query Stenographer with such tools as Stenoread or Stenocurl.
+
+BPF Introduction
+  Capturing all traffic in PCAP operations is an effective approach to have a complete forensic trail. 
+  However, full packet capture remains an extremely resource-intensive operation. 
+  Additionally, scenarios exist in which capturing all network traffic may not be the desired result. 
+  Packet filtering is an additional PCAP technique that can significantly tune PCAP operations to meet the desired intent as well as significantly reduce resource requirements (for both processing and storage).

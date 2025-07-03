@@ -1,0 +1,51 @@
+Overview of SSL/TLS
+  Hypertext Transfer Protocol Secure (HTTPS) is an extension of Hypertext Transfer Protocol (HTTP) that negotiates a secure encrypted connection between the client and server before sending HTTP data. 
+  Although this provides confidentiality, it causes visibility gaps for a Cyber Defense Analyst (CDA) seeking to analyze web traffic.
+
+RSA Encryption
+  The underlying workings of Rivest–Shamir–Adleman (RSA) encryption are beyond the scope of this lesson, but a basic understanding of it is required to understand TLS encryption. 
+  RSA encryption is asymmetric and uses the relationships between prime numbers to perform mathematical operations.
+
+Certificate Authentication Chains
+  RSA private–public key pairs can be used to sign values by encrypting a checksum of a value using the private key. 
+  This methodology is used to allow for trusted certificates to sign other certificates that should also be trusted. 
+  The usage of this methodology in modern browsers has allowed the creation of Trusted Root Certificate Authorities (CA), which can sign Intermediate CA certificates, and both Root and Intermediate CAs can sign individual certificates.
+
+TLS Handshake
+  HTTPS handshakes occur after the normal Transmission Control Protocol (TCP) handshake. Figure 10.5-1 provides a simplified version of the flow of a typical handshake.
+
+  1. ClientHello: The client sends a message to the server to initiate the connection, which includes the list of cipher suites the client supports as well as proposed TLS versions and a random sequence of bytes (the “client random”).
+  2. ServerHello: After receiving the ClientHello message, the server responds with the cipher suite to be used, the public certificate for the server, the TLS version to be used, and a random sequence of bytes (the “server random”). The server may also request a client certificate.
+  3. Pre-Master Secret: Using the public key sent to the client, the client encrypts another sequence of bytes and sends it to the server (the “pre-master secret”). If a client certificate was requested, it is also sent at this time.
+  4. Session Keys: Using the same methodology on both server and client, both sides use the “client random,” “server random,” and “pre-master secret” to derive the encryption keys to use for this session.
+
+
+  Because the session key is derived partially from the “pre-master secret” – a value that is encrypted using the server’s public key – a third party cannot decrypt this traffic without access to the server’s private key or access to the client or server machine to extract the session key. 
+  Although this represents a typical handshake, the steps can vary. For example, if the Diffie–Hellman (DH) key exchange is used, the steps differ in such a way that the client and server encrypt the byte sequences and DH parameters using their private keys, and the session key is calculated differently. 
+  Using this methodology, two private–public key pairs (client and server) are used during the handshake.
+
+Decrypting Packet Captures
+  Wireshark can decrypt TLS sessions within PCAPs under either of the following conditions:
+  Session keys are available for the particular TLS session. This requires preconfiguration of the server or client to log all session keys.
+  The server’s private key is available.
+
+  The method involving the private key has some extra conditions, due to how TLS sessions are negotiated:
+  The server’s private key, which resides on the web server, is required.
+  The initial handshake must be present in the PCAP. For the session keys to be calculated, DH key exchange must not be used.
+  The TLS version used must be a version prior to TLS 1.3. TLS 1.3 introduced forward secrecy, which requires a DH key exchange to operate, by default. 
+
+Sensor Configurations
+  Network sensors can be configured to gather decrypted TLS data – either by decrypting traffic on the fly using the server’s private key or by proxying traffic. 
+  The approaches differ based on positioning of the sensor: collecting all client-initiated traffic leaving the network and collecting all traffic bound for specific servers. 
+  This lesson refers to the categories as client-initiated collection and server-bound collection, respectively.
+
+Client-Initiated Collection
+  The most practical setup for collecting outbound TLS traffic involves proxying all that traffic through a network device. 
+  (This practice is also known as break and inspect.) Under this proxy setup, the client connects and establishes a TLS connection to the proxy device, which also establishes a TLS connection to the intended server. 
+  The device forwards requests and responses back and forth after either performing inspection or forwarding the unencrypted data to a sensor.
+
+Server-Bound Collection
+  Collecting and decrypting all traffic bound to a server or web application can be accomplished in two primary ways: by using the private key or using a proxy server. 
+  Using the private key involves configuring sensors with the private key so that the sensors can perform the same decryption steps that the earlier Wireshark examples used. 
+  The proxy server setup involves a “reverse proxy” (present in the back end and dealing with inbound traffic rather than the typical proxy setup) that handles all encryption for a particular website or application and forwards the traffic to the actual target server, typically unencrypted.
+

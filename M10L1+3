@@ -1,0 +1,30 @@
+Applying Display Filters To TShark
+
+An interface can be captured by using -i. An example is as follows: 
+tshark -i eth0 
+
+A display filter can be added by using -Y. An example is as follows: 
+tshark -Y tcp 
+
+The two commands above can be combined as the following:
+tshark -i eth0 -Y tcp 
+
+Run the following command to create a new PCAP file named maliciousip443.pcap. The applied display filter limits the new file to only TCP port 443 traffic to or from the IP address 202.84.73.91:
+$ tshark -r fullday.pcap -w maliciousip443.pcap -Y "ip.addr == 202.84.73.91 and tcp.port == 443"
+
+In the above TShark command, the following (case-sensitive) parameters are used:
+-r: The file to be read, ensuring that TShark acts on a file rather than capturing from an interface.
+-w: Redirect output to a file rather than displaying output to the terminal.
+-Y: The display filter to be used.
+
+When executed correctly, the above command has no output to the terminal.
+
+To quickly analyze statistics of the newly created PCAP file, use the capinfos utility to display a general overview of the file characteristics. Run the following command:
+  capinfos maliciousip443.pcap
+
+In the Terminal window, run the following command to create a targeted PCAP file containing only traffic from the suspicious IP address above:
+$ tshark -r sensoroni_onion-fn2_1023.pcap -Y "ip.addr == 104.53.222.103" -w exported_objects/evidence_1.pcap
+
+AP file from sensor 1 containing traffic from the originally discovered infected host, run the following command to create a new file containing only traffic to or from 172.16.4.2:
+$ tshark -r sensoroni_onion-fn1_1024.pcap -Y "ip.addr == 172.16.4.2" -w exported_objects/evidence_2.pcap
+

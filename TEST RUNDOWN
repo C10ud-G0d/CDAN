@@ -1,0 +1,25 @@
+CTI Models
+diamond model, cyber killchain
+
+MITRE mitigation starts identify the T code to go with the scenario (what t code directly adhears to the situation) 2 will be close which one is closer
+
+APT Known IOC : IOC's are already parsed observable text file already provided take a look at system overview and see if there are instances of comprimises
+
+Traffic Flows: Will say you have traffic going from two different subnets what will the ingress and egress be of the packets? Where does it have to ingress and then egresss (ingress form switch to the router egress from the router to destination subnet/switch)
+
+PRACTICAL
+
+Recognize suricata Error 
+
+Nfdump: Utilize 
+cli= nfdump -r netflow_1  -I
+
+ROuter SPAn config: 
+
+shrun 
+
+tdpdump -r (oldfile.pcap) -Y "display filter" -w (newfile)           THEN shasum -a 256 newfile
+
+ALWAYS SAVE FILE AS RAW
+
+

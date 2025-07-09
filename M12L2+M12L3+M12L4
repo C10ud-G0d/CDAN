@@ -1,0 +1,119 @@
+Distributed Network Architecture
+  In a distributed network architecture, network devices and resources are divided over several smaller networks. 
+  Examples of “smaller networks” include single branch locations or buildings within a larger enterprise. 
+  In addition to distributing the network architecture and components, a distributed network architecture model allows the placement of systems closer to those that use them, 
+  which has the potential to decrease overall network utilization while increasing performance to end users.
+
+  Distributed networks rely heavily on routing and switching protocols, as each section of a distributed network is effectively its own network segment connected to a larger, overarching network. 
+  Without the use of routing protocols, changes made in one network segment would not automatically be pushed into other segments of the network. 
+  This would require significant manual intervention in updating routing information on other network segments. 
+  Additionally, manual configuration of routing is susceptible to human error, as incorrect configurations can cause significantly adverse impacts to the network at large.
+
+Distributed Network Routing
+  Distributed networks rely on dynamic routing protocols to ease the configuration burden on network administrators. Dynamic routing protocols are split into two categories: Interior Gateway Protocols (IGP) and Exterior Gateway Protocols (EGP). 
+
+Interior Gateway Protocols
+  IGPs are dynamic routing protocols intended for use within a single routing domain. These are the most common protocols used within enterprise networks. 
+  The IGP protocols Router Information Protocol (RIP) and Open Shortest Path First (OSPF) are explained in this lesson, 
+  but there are numerous other IGP protocols as well, such as Intermediate System to Intermediate System (IS-IS), Interior Gateway Routing Protocol (IGRP), and Enhanced Interior Gateway Routing Protocol (EIGRP).  
+
+Routing Information Protocol
+  RIP is one of the earliest-developed dynamic routing protocols.   
+  RIP is a distance-vector routing protocol that uses hop count as the primary routing metric and uses UDP port 520. 
+  Hop count is a simple metric that represents how many routers traffic travels through on the way to its destination. 
+  In the case of RIP, traffic is routed based on the route with the smallest number of hops to the destination.
+
+Open Shortest Path First
+  OSPF is a link-state protocol. A link may be thought of as an interface on an OSPF-enabled router. 
+  The collection of all link-states constitutes the Link-State Database (LSDB). 
+  OSPF does not use a transport protocol and encapsulates its traffic directly in Internet Protocol (IP) packets using protocol number 89.
+  
+  Cost is the metric used in OSPF routing to determine the best path to a destination. 
+  In an OSPF implementation, each interface of a router has a cost value. 
+  The cost is directly related to the bandwidth of an individual interface. 
+  The higher bandwidth an interface has, the lower its cost is.
+
+  When updating the topology, each router places itself at the root of a tree and calculates the shortest path to each destination based on cumulative cost to reach the destination. 
+  This causes each router to have its own topology view, as the shortest path to a destination may be different from different routers.
+
+Exterior Gateway Protocols
+  EGPs are routing protocols designed for routing traffic across large-scale networks, such as the internet. 
+  Although EGPs are most commonly used on the internet backbone, they may also be used within large enterprise networks. 
+
+Border Gateway Protocol
+  BGP is the premier protocol used throughout the internet and large-scale enterprise networks for routing between Autonomous Systems (AS). 
+  BGP is a path-vector protocol that determines the best path to a destination based on available paths and preconfigured rules. 
+  Path Attributes (PA) are assigned variables (the rules) that routers use to determine the best path to a destination network. 
+  BGP enables routers to exchange information about network prefixes under the responsibility of an AS.
+
+  BGP works by establishing paths, which are a sequence of Autonomous System Numbers (ASN) that traffic must be routed through to reach a destination network. 
+  When a BGP router advertises a new network, BGP peers receive the advertisement and append their ASN to the AS_PATH variable of the BGP message. 
+  This update is then sent to neighboring BGP peers, which perform the same process. 
+  The end result is that, through BGP, routers can determine what paths are available to a destination.
+
+Spanning Tree Protocol
+  In large and distributed networks, it is common for multiple switches to be interconnected. 
+  Because switches still allow packets to be broadcast to all ports when intended, switched networks are susceptible to broadcast storms when multiple switches are interconnected with redundant connections. 
+  In the case of interconnected switches, a broadcast storm occurs when a frame marked for broadcast is broadcast out of all ports of a switch and the broadcast repeats through the series of interconnected switches
+
+  STP is a switching protocol that builds a loop-free topology of an Ethernet network. 
+  STP works by creating a tree based on its relationship to other bridges and determining a single path to forward traffic through the topology while blocking traffic on redundant paths that could cause a loop.
+
+  In STP, switches communicate with their neighbors in the Local Area Network (LAN) using Bridge Protocol Data Units (BPDU). 
+  BPDUs are the data frames that contain information about STP and are used to transfer STP information between switches. 
+  They are sent by switches on a regular interval.
+
+  The first goal of STP is to identify the root bridge in the topology. 
+  When a switch comes online, it assumes itself as the root bridge and proceeds to use its local bridge ID as the root bridge ID. 
+  The bridge ID is a concatenation of the bridge priority (a configurable value on most enterprise switches) and the Media Access Control (MAC) address of the switch. 
+  The switch then listens for BPDUs from neighbor switches and performs the following:
+
+  If the switch receives a BPDU with a higher bridge ID, the ID is ignored and the switch continues to see itself as the root bridge. 
+  If the switch receives a BPDU with a lower bridge ID, the switch updates its BPDUs to include the new root bridge ID (the switch with the lowest bridge ID) along with an updated root path cost to reach the new root bridge.
+
+  Once the root bridge has been elected, non-root switches need to determine the root port. 
+  The root port is the port used by a switch to forward packets toward the root bridge. 
+  Each switch determines the root port by identifying the port with the lowest path cost to the root bridge.
+  Ports on a switch that facilitate a path to the root bridge for other switches are called designated ports. 
+
+  STP is a legacy protocol and has been replaced with newer protocols that accomplish the same goal in most networks. 
+  However, newer protocols simply build on the foundation of STP and enhance its capabilities. 
+  Rapid Spanning Tree Protocol (RSTP) is a common and newer implementation of STP that significantly speeds up the functions of STP.
+  Whereas STP may require 30 seconds or more to respond to topology changes, RSTP can adapt in less than 3 seconds. 
+  Cisco switches commonly employ a proprietary standard called Per-VLAN Spanning Tree (PVST) that allows Cisco switches to build separate spanning trees for each Virtual Local Area Network (VLAN) configured on a switch. 
+  Multiple Spanning Tree Protocol (MSTP) is similar to PVST and incorporates spanning trees for use on VLANs; it is not a proprietary protocol. 
+  Shortest Path Bridging (SPB) combines technologies from many of these switching protocols and allows for multiple equal cost paths to be active at the same time. 
+
+Sensor Placement Considerations
+
+  What should be avoided in a switched network topology?  
+    A mission may require the placement of sensors to capture network traffic between devices on the same network segment. 
+    If the network segment contains multiple interconnected switches, careful consideration must be given to the implementation of network taps and Switched Port Analyzer (SPAN) ports, as STP may impact how packets move between switches. 
+
+  What should be avoided within a routed network topology?
+    When traffic capture in a distributed architecture is desired, thought must be given to the operation of routing protocols that are in use within the environment. 
+    When multiple routers are interconnected, multiple paths may exist between points within the network. 
+
+  What are the trust boundaries?
+    Trust boundaries are connections between trusted and untrusted networks or between two networks with different levels of trust and security. 
+    Trust boundaries are often ideal sensor placement locations, as placing sensors in this location provides the ability to capture all traffic for analysis that ingresses and egresses the trusted zone. 
+
+DNScat a tool used to create encrypted C2 channels
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

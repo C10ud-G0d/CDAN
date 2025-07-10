@@ -1,0 +1,182 @@
+Identifying Security Gaps
+  The term security gap refers to anywhere in a network that is not protected by existing controls. The ability to identify and remediate security gaps is critical in any assessment of a network.
+  This understanding requires several pieces of accurate information, including an asset inventory, network maps, and identification of Key Terrain in Cyberspace (KT-C) compiled into a KT-C list. 
+  All three of these relevant pieces of information are often out of date and should be updated with help from the mission partner before a security gap assessment begins. 
+  Asset lists should include such information as the Operating System (OS) version and the services each asset uses. 
+  Identifying KT-C also empowers the analyst to prioritize security controls that remediate security gaps based on risk to assets and mission impact.
+  
+Network Visibility
+  Understanding the flow of network traffic and maximizing network visibility are the next steps in a security gap analysis. 
+  Full network visibility involves collecting logs and network traffic from every device on the network with no blind spots.
+
+  As part of the risk assessment, analysts should take into consideration situations in which technical controls are not possible. 
+  For example, if a known vulnerability exists on a service but the service cannot be updated, ensuring visibility and monitoring can be a way to minimize that particular risk.
+
+Blind Spots
+  Blind spots are areas of a network that existing sensors do not collect data from; they can be another form of a security gap.
+  Identifying this form of security gap requires an understanding of the traffic flow of a network and an understanding of which traffic is useful. 
+  A good example of a blind spot is a sensor that captures all traffic flowing in and out of a router but that may not be able to see traffic in subnets connected to the router.
+
+Layering Technology
+  Defense in depth is a security concept that involves layering defenses to minimize the risk of a single failure of a control from exposing the network. The layered defenses often involve implementing controls at multiple levels. 
+
+Layering Data Collection
+  The application of multiple collection techniques provides an opportunity to layer defensive capabilities and enhance the quality of collected data. 
+  This methodology minimizes the downside of each individual technology and reduces blind spots.
+
+  A prime example of layered collection is the collection of both Packet Capture (PCAP) data and Cisco® IOS® NetFlow. 
+  Although PCAP contains all the information available in NetFlow (in fact, NetFlow can be generated using PCAP), storing and analyzing PCAP is resource intensive and has diminishing returns over a long period of time. 
+  NetFlow, on the other hand, contains records of session data and, as a result, is much less resource intensive to store and process. 
+  NetFlow can be stored for a much longer time period than PCAP, which is rolled over frequently in most environments. 
+  Collecting data for both PCAP and NetFlow allows analysts to investigate recent traffic with PCAP and have a long-term record to help understand typical traffic patterns. 
+  NetFlow data also allows an analyst to perform investigations over a longer period of time, albeit with lower fidelity than PCAP data.
+
+ZEEK
+  Zeek, formerly Bro, is an open-source Network Security Monitoring (NSM) framework capable of extracting high-fidelity network transaction logs and file content from network traffic.
+  Zeek is customizable and extremely scalable, capable of operating in high-performance, high-throughput networks.
+
+  *conn.log: Contains records of both stateful and stateless connections (i.e., Transmission Control Protocol [TCP] and User Datagram Protocol [UDP]). Stores data as sessions.
+  *dns.log: Contains Domain Name System (DNS) queries and responses at the application level. Cannot record encrypted DNS traffic.
+  *http.log: Contains records of Hypertext Transfer Protocol (HTTP) sessions. Does not have capabilities to record Hypertext Transfer Protocol Secure (HTTPS) sessions without a solution to downgrade HTTPS to HTTP.
+  *ftp.log: Contains records of File Transfer Protocol (FTP) connections.
+  *smtp.log: Contains records of Simple Mail Transfer Protocol (SMTP) traffic. Unencrypted SMTP traffic (usually over port 25) contains some fields such as the Mail User Agent (MUA) not present in records of encrypted SMTP (usually over port 465 or 587).
+  *ssh.log: Contains records of Secure Shell (SSH) traffic. Fields include information on negotiation algorithms and authorization attempts.
+  *dhcp.log: Contains records of Dynamic Host Configuration Protocol (DHCP). Because the DHCP handshake process consists of two separate connections in dhcp.log, each entry has two UIDs.
+  *rdp.log: Contains records of Remote Desktop Protocol (RDP) connections.
+
+  files.log: Contains a record of all files observed in network traffic. Zeek can be configured to extract  and save observed files to disk.
+  ssl.log: Contains records of encrypted traffic, including HTTPS. Does not have the capability to recognize what protocol is encrypted using Transport Layer Security (TLS). Stores information, including the TLS version.
+  x509.log: Contains records of encryption negotiation that can be correlated with records in ssl.log.
+  pe.log: Similar to files.log, identifies Microsoft binaries in the Portable Executable (PE) format.
+  ntp.log: Contains records of Network Time Protocol (NTP) communication.
+  irc.log: Contains records of Internet Relay Chat (IRC) connections and messages.
+  traceroute.log: Detects and records traceroute attempts over multiple protocols.
+  tunnel.log: Detects and records encapsulated traffic using multiple techniques.
+  dpd.log: Dynamic Port Detection (DPD) analyzes and records the protocol used in a connection, regardless of port number.
+  known_*.log
+  known_certs.log: Contains information about SSL/TLS certificates on the network.
+  known_hosts.log: Records an Internet Protocol (IP) address and a timestamp when new systems connect to the network.
+  known_services.log: Records new services when they appear on the network.
+  software.log: Records information about applications and software when they appear on the network.
+  weird.log: Records connection information whenever Zeek encounters something unexpected, usually at the protocol level. This log is useful for creating alerts to identify anomalous traffic.
+  notice.log: Usually contains records similar to weird.log. Can be customized to generate alerts.
+  capture_loss.log: Detects and records gaps in traffic, usually by analyzing TCP sequence numbers.
+  reporter.log: Records internal Zeek alerts.
+
+Suricata
+  Suricata is an open-source Intrusion Detection System (IDS), Intrusion Prevention System (IPS), and NSM engine that allows researchers to define rules that help detect and identify Malicious Cyberspace Activity (MCA). 
+
+NetFlow
+  NetFlow is a network protocol created by Cisco® that records IP traffic metadata from a router, switch, or host. NetFlow was designed to provide insights to network engineers, but it is also used by security analysts to access and correlate connections.
+
+Stenographer
+  Stenographer is a lightweight Packet Capture (PCAP) tool designed to capture and write packets to disk very quickly (up to 10 gigabits per second [Gbps]).
+
+  Stenotype: Reads packets off the wire and writes them to disk.
+  Stenographer: Manages Stenotype, monitors disk usage, deletes old packets, and responds to queries.
+  Stenocurl: Controls access to queries and performs authentication.
+  Stenoread: Passes queries to Stenocurl and passes answers using Tcpdump.
+
+Arkime
+  Arkime, formerly Moloch, is a PCAP platform that prioritizes indexing and search functionality. 
+  Arkime uses Elasticsearch to index traffic through the Application layer of the OSI model. 
+  The web interface and Application Programming Interface (API) make the captured packets and protocol-specific analysis accessible to analysts.
+
+SIEM Collection and The Elastic Stack
+  SIEMs collect and organize data in a central location. This allows analysts to create queries to identify and investigate events. 
+  Modern SIEMs use visualizations and dashboards that enhance investigative capabilities.
+  Kibana and Splunk are two of the most common SIEMs in use today.
+
+The Elastic Stack
+  The Elastic Stack is an open-source platform often used as a SIEM. 
+  The Elastic Stack comprises Elasticsearch, Logstash, Kibana, and Beats, which work together to collect, index, search, and present data. 
+  Beats collect data, including logs, on different devices that are forwarded to Logstash to be indexed by Elasticsearch. 
+  Once the data has been indexed, Kibana is used to interact with the data by querying the Elasticsearch database. 
+  Each component is discussed in more detail in this lesson, but a general understanding of the flow of data is useful.
+
+Osquery
+  Osquery is a Structured Query Language (SQL) database that stores information about endpoints. 
+  Osquery stores information about running processes, network connections, browser plugins, and hardware. 
+  It uses an agent (Osqueryd) that regularly generates logs and reports changes on the endpoint. 
+
+Beats
+  Beats are open-source data shippers used to collect and forward logs to Logstash or directly to Elasticsearch. 
+  Many types of Beats are available, based on the data to be collected, and are installed on the system
+
+  Filebeat: Collects logs from security devices, containers, and hosts using a wide variety of modules.
+  Metricbeat: Collects metrics from systems and services. Metrics can include information about CPU usage, memory, filesystem, and network statistics.
+  Packetbeat: Collects and analyzes packets from hosts.
+  Winlogbeat: Collects Windows event logs.
+  Heartbeat: Collects uptime and downtime data on services and devices.
+
+Logstash
+  Logstash is the data-processing pipeline of The Elastic Stack that ingests and parses different data sources and formats. 
+  Data is shipped from a log source to Logstash, where the data is stored temporarily and processed.
+
+Kafka
+  Apache Kafka is an event-streaming platform used to compile events and data from disparate sources to generate metrics. 
+  Because Kafka is not a SIEM, it is not usually used for network analysis. 
+  Instead, it is typically used as an intermediary between log collection and Logstash to standardize data formats.
+
+Sensor Deficiencies
+  On sensors with multiple CPU sockets, analysts can dedicate a processor or CPU thread for a tool or service using process pinning. 
+  When a process is pinned, it is prioritized by the scheduler for the CPU or thread, which can minimize load times and increase performance by keeping process relevant data in the CPU cache.
+
+
+IDS Evasion Techniques
+  Despite the ability of network sensors to detect Malicious Cyberspace Activity (MCA), many techniques to evade detection exist. 
+  Adversaries can use these evasion techniques to disguise Indicators of Compromise (IOC) and infect a network without detection. The following are some common IDS evasion techniques.
+
+Fragmentation
+  Fragmentation is an IDS evasion technique that involves splitting malicious packets into several smaller packets. 
+  This makes it necessary for the IDS to perform the CPU-intensive task of reassembling packet streams to detect malicious activity. 
+  Derivatives of this technique involve inserting another packet in the same stream between the fragmented packets or sending the packets out of order. 
+
+Encoding
+  Encoding is an IDS evasion technique that uses an encoding algorithm such as Uniform Resource Locator (URL), Base64, or Exclusive Or (XOR). 
+  If the IDS uses signature-based detection, encoding strings identified as IOCs can be used by the detection engine to sneak.
+
+Low-Bandwidth Attacks
+  Low-bandwidth attacks involve an adversary spreading an attack over a long period of time or distributing the attack over multiple sources. 
+  An example of this is a password cracker that tests one password a day, appearing as though a user mistyped their password. 
+  These attacks are difficult for a normal IDS to distinguish from normal network traffic and often require custom scripts or analysis to identify.
+
+CPU Exhaustion
+  CPU exhaustion is a Denial of Service (DoS) technique that targets an IDS. 
+  Because IDS and sensors “fail open,” attackers can flood the network to overwhelm the CPU. 
+  Fail open is a security concept that means that if a security control fails, it does so in a way that allows all traffic through a device. 
+  Adversaries can take advantage of the fact that some IDS signatures are computationally expensive and send packets specifically designed to maximize CPU usage. 
+  Once the CPU buffer is full, the sensor cannot handle more traffic, and the adversary can conduct malicious activity without identification by the IDS.
+
+Filebeat
+  Data within a network is generated from multiple sources and contains a wide range of information about systems, connections, traffic, and other network elements. 
+  This data is often unstructured, being in its own format. For example, Apache web server logs are entirely different from NetFlow data generated from a router, and both are unrelated to Twitter Application Programming Interface (API) data.
+
+Heartbeat
+  Heartbeat is a member of the Elastic Beats family. Similar to Filebeat, which was introduced in the last lesson, Heartbeat is a lightweight shipper that sends information from a host to a destination. 
+  Unlike Filebeat, which is geared toward handling log files, Heartbeat monitors various services to ensure that they are “alive” and reachable. 
+
+Packetbeat
+  Packetbeat is a member of the Elastic Beats family. 
+  The tool is a lightweight shipper that captures and analyzes network traffic.
+  Unlike Filebeat and Heartbeat, which focus on hosts, Packetbeat provides visibility to the communications between systems. 
+  By parsing and analyzing network traffic in real time, Packetbeat allows analysts to examine trends and anomalies within Elasticsearch. 
+
+   Once installed and running, Packetbeat captures network traffic and then parses protocols
+   Once the protocols are parsed, Packetbeat correlates the messages into transactions. 
+   These correlated transactions are sent to Elasticsearch as JavaScript Object Notation (JSON). 
+   The JSON data contains various exported fields, which are populated with the information contained in the traffic. 
+   Finally, Elasticsearch indexes these fields to be viewed by the user. 
+
+
+
+
+
+
+
+
+
+
+
+
+

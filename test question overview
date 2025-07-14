@@ -1,0 +1,37 @@
+mutate is a keyword when making changes
+
+2.
+Add a logstash pipeline to move my zeek files to elastic search how do you set it up?
+
+
+3.
+read a inputs.conf file 
+
+if disabled = 0 it means its enabled
+if missing a section it means you wont be able to know
+1 = true
+0 = false
+
+4.
+look at elastic data and answer something about protocols
+
+5.
+go into security onion and do a lifecycle policy change.
+
+6.
+reverse into aa older version of a kql
+
+7.
+basic splunk search
+
+8.
+splunk make a vizualization (with a pipeline)
+
+9.
+scenerio about continuing on with your mission
+(if in a hostile in evironment you have to continue the mission)
+
+10.
+MITRE question
+
+
